@@ -291,8 +291,8 @@ with torch.no_grad():
     smeared_mass_all = calculate_invariant_mass(smeared_momenta).cpu().numpy() # Smeared Mass
     smeared_mass_all = smeared_mass_all[np.isfinite(smeared_mass_all)]  # Remove NaN/Inf
 
-target_mass_data = calculate_invariant_mass(momenta_data[:n_samples]).cpu().numpy() # Target
-mass_MC = calculate_invariant_mass(momenta_MC[:n_samples]).cpu().numpy() # Source
+target_mass_data = calculate_invariant_mass(momenta_data).cpu().numpy() # Target
+mass_MC = calculate_invariant_mass(momenta_MC).cpu().numpy() # Source
 
 # compare some stats
 print("Target mass: mean/min/max:", target_mass_data.mean(), target_mass_data.min(), target_mass_data.max())
