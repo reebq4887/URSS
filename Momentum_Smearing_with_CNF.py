@@ -199,8 +199,9 @@ muon_MC = get_data(MC_file)[:,:n_samples].to(device) #Source Data (to smear)
 momenta_data = get_three_momenta(muon_data)
 momenta_MC = get_three_momenta(muon_MC)
 
-muon_contexts = get_contexts(MC_file)[:,:n_samples]
-muon_contexts = muon_contexts[:4, :].T.to(device) # Just getting it into the right shape
+# muon_contexts = torch.stack([muon_data[1,:], muon_data[4,:], chargem, chargep]).T.to(device) #Add if using toy data
+muon_contexts = get_contexts(MC_file)[:,:n_samples] # Remove if using toy data
+muon_contexts = muon_contexts[:4, :].T.to(device) # Just getting it into the right shape (remove if using toy data)
 
 # Transform the source (MC) dataset and contexts for easier training, and mask to exclude any outliers
 MC_transformed, mask_MC, params_MC = transform_data(momenta_MC, eps=1e-6)
