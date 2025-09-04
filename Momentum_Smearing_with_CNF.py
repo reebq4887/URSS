@@ -256,7 +256,7 @@ for epoch in range(n_epochs):
     # Target PDF (precomputed on full data)
     with torch.no_grad():
         target_mass = calculate_invariant_mass(momenta_data) # Target mass batched
-        target_pdf = smear_histogram(target_mass, edges=edges)[:smeared_pdf.shape[0]] # KDE for loss calculation
+        target_pdf = smear_histogram(target_mass, edges=edges)[:batch_size] # KDE for loss calculation
 
     loss = wasserstein_1d_weighted(smeared_pdf, target_pdf, bin_width)
     optimizer.zero_grad()
